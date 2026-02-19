@@ -72,6 +72,7 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 body {
@@ -2409,6 +2410,20 @@ a.contact-item:hover {
 
 /* ---- Mobile (max-width: 768px) ---- */
 @media (max-width: 768px) {
+    /* -- Prevent horizontal overflow -- */
+    .process,
+    .services,
+    .calculator,
+    .borrowing-calc,
+    .about,
+    .testimonials,
+    .contact,
+    .faq,
+    .enquiry,
+    .footer {
+        overflow-x: hidden;
+    }
+
     /* -- Navigation -- */
     .nav-links {
         display: none;
@@ -2454,6 +2469,11 @@ a.contact-item:hover {
 
     .nav-toggle {
         display: flex;
+    }
+
+    /* -- Prevent iOS zoom on input focus (font-size must be >= 16px) -- */
+    input, select, textarea {
+        font-size: 16px !important;
     }
 
     /* -- Sections: reduce vertical padding -- */
@@ -2699,6 +2719,10 @@ a.contact-item:hover {
 /* ---- Small Mobile (max-width: 480px) ---- */
 @media (max-width: 480px) {
     .container {
+        padding: 0 var(--spacing-md);
+    }
+
+    .nav-container {
         padding: 0 var(--spacing-md);
     }
 
