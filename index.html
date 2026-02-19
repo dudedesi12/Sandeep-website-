@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoanMate Finance | Your Trusted Mortgage Broker</title>
+    <meta name="description" content="LoanMate Finance - Expert mortgage broking services in Adelaide. Home loans, car loans, asset finance, and commercial finance solutions tailored for you.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M14 2L2 10v12a2 2 0 002 2h6v-8h8v8h6a2 2 0 002-2V10L14 2z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <span>LoanMate Finance</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#services">Services</a>
+                <a href="#calculator">Calculator</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact" class="nav-cta">Get Started</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge animate-on-scroll">
+                    <span class="badge-dot"></span>
+                    Trusted by hundreds of Australians
+                </div>
+                <h1 class="hero-title animate-on-scroll">
+                    Finance made<br>
+                    <span class="text-gradient">simple.</span>
+                </h1>
+                <p class="hero-subtitle animate-on-scroll">
+                    Expert mortgage broking that puts you first. From home loans to commercial finance, we find the right solution — so you don't have to.
+                </p>
+                <div class="hero-actions animate-on-scroll">
+                    <a href="#contact" class="btn btn-primary btn-lg">
+                        Get Free Consultation
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#calculator" class="btn btn-secondary btn-lg">
+                        Calculate Repayments
+                    </a>
+                </div>
+                <div class="hero-stats animate-on-scroll">
+                    <div class="stat">
+                        <span class="stat-number" data-count="500">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Happy Clients</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="30">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Lender Partners</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-dollar">$</span><span class="stat-number" data-count="200">0</span><span class="stat-suffix">M+</span>
+                        <span class="stat-label">Loans Settled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Services</span>
+                <h2 class="section-title">The right loan for<br>every milestone.</h2>
+                <p class="section-subtitle">Whether you're buying your first home, upgrading your car, or growing your business — we've got you covered with tailored finance solutions.</p>
+            </div>
+            <div class="services-grid">
+                <!-- Home Loans -->
+                <div class="service-card animate-on-scroll" data-delay="0">
+                    <div class="service-icon" style="--icon-bg: #E8F5E9; --icon-color: #2E7D32;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 3L3 13v14a2 2 0 002 2h8v-8h6v8h8a2 2 0 002-2V13L16 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Home Loans</h3>
+                    <p class="service-desc">First home buyer, refinancing, or investing — we compare hundreds of home loan options to find your perfect match.</p>
+                    <ul class="service-features">
+                        <li>First Home Buyer Loans</li>
+                        <li>Refinancing</li>
+                        <li>Investment Loans</li>
+                        <li>Construction Loans</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn more
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Car Loans -->
+                <div class="service-card animate-on-scroll" data-delay="100">
+                    <div class="service-icon" style="--icon-bg: #E3F2FD; --icon-color: #1565C0;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M26 18h1a2 2 0 012 2v2a2 2 0 01-2 2h-1M6 18H5a2 2 0 00-2 2v2a2 2 0 002 2h1M7 18l2-6.5a2 2 0 011.9-1.5h10.2a2 2 0 011.9 1.5L25 18M7 18h18M7 18v6h3v-2h12v2h3v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="10" cy="21" r="1.5" fill="currentColor"/>
+                            <circle cx="22" cy="21" r="1.5" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Car Loans</h3>
+                    <p class="service-desc">Drive away in your dream car with competitive rates. New or used, personal or business — we make car finance easy.</p>
+                    <ul class="service-features">
+                        <li>New & Used Vehicles</li>
+                        <li>Competitive Fixed Rates</li>
+                        <li>Flexible Terms</li>
+                        <li>Quick Approval</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn more
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Asset Finance -->
+                <div class="service-card animate-on-scroll" data-delay="200">
+                    <div class="service-icon" style="--icon-bg: #FFF3E0; --icon-color: #E65100;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect x="4" y="8" width="24" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M4 14h24M10 20h4M10 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M20 8V6a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Asset Finance</h3>
+                    <p class="service-desc">Fund your business equipment, machinery, or technology with flexible asset finance solutions designed to keep you moving.</p>
+                    <ul class="service-features">
+                        <li>Equipment Finance</li>
+                        <li>Machinery Loans</li>
+                        <li>Technology Leasing</li>
+                        <li>Chattel Mortgage</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn more
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Commercial Finance -->
+                <div class="service-card animate-on-scroll" data-delay="300">
+                    <div class="service-icon" style="--icon-bg: #F3E5F5; --icon-color: #7B1FA2;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M4 28h24M8 28V8l8-4 8 4v20M14 12h4M14 16h4M14 20h4M14 24h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Commercial Finance</h3>
+                    <p class="service-desc">Grow your business with tailored commercial lending. From property purchases to working capital, we structure the right deal.</p>
+                    <ul class="service-features">
+                        <li>Commercial Property</li>
+                        <li>Business Loans</li>
+                        <li>Working Capital</li>
+                        <li>Development Finance</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn more
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Personal Loans -->
+                <div class="service-card animate-on-scroll" data-delay="400">
+                    <div class="service-icon" style="--icon-bg: #E0F7FA; --icon-color: #00838F;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <circle cx="16" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                            <path d="M6 28c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Personal Loans</h3>
+                    <p class="service-desc">Whatever life throws your way — holidays, renovations, or debt consolidation — get a personal loan that fits your budget.</p>
+                    <ul class="service-features">
+                        <li>Debt Consolidation</li>
+                        <li>Renovation Loans</li>
+                        <li>Holiday Finance</li>
+                        <li>Flexible Repayments</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn more
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- SMSF Loans -->
+                <div class="service-card animate-on-scroll" data-delay="500">
+                    <div class="service-icon" style="--icon-bg: #FCE4EC; --icon-color: #C62828;">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 4l-2 6H8l5 4-2 6 5-4 5 4-2-6 5-4h-6L16 4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M8 24h16M10 28h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">SMSF Loans</h3>
+                    <p class="service-desc">Invest in property through your Self-Managed Super Fund with specialist SMSF lending solutions and expert guidance.</p>
+                    <ul class="service-features">
+                        <li>SMSF Property Loans</li>
+                        <li>Limited Recourse</li>
+                        <li>Expert Structuring</li>
+                        <li>Competitive Rates</li>
+                    </ul>
+                    <a href="#contact" class="service-link">
+                        Learn more
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="process">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">How It Works</span>
+                <h2 class="section-title">Three steps to<br>your new loan.</h2>
+                <p class="section-subtitle">We've streamlined the process so you can focus on what matters most.</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step animate-on-scroll" data-delay="0">
+                    <div class="step-number">01</div>
+                    <h3>Book a Chat</h3>
+                    <p>Schedule a free consultation. We'll understand your goals, finances, and find the best path forward.</p>
+                </div>
+                <div class="process-connector animate-on-scroll"></div>
+                <div class="process-step animate-on-scroll" data-delay="150">
+                    <div class="step-number">02</div>
+                    <h3>We Compare</h3>
+                    <p>We search across 30+ lenders to find the most competitive rates and terms tailored to your situation.</p>
+                </div>
+                <div class="process-connector animate-on-scroll"></div>
+                <div class="process-step animate-on-scroll" data-delay="300">
+                    <div class="step-number">03</div>
+                    <h3>Get Approved</h3>
+                    <p>We handle the paperwork and negotiations. You get the keys, the car, or the capital — stress-free.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator" id="calculator">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Calculator</span>
+                <h2 class="section-title">See what you<br>could pay.</h2>
+                <p class="section-subtitle">Use our mortgage calculator to estimate your repayments. Get a clear picture before you commit.</p>
+            </div>
+            <div class="calculator-card animate-on-scroll">
+                <div class="calc-inputs">
+                    <div class="calc-group">
+                        <label class="calc-label">
+                            <span>Loan Amount</span>
+                            <span class="calc-value" id="loanAmountDisplay">$500,000</span>
+                        </label>
+                        <input type="range" id="loanAmount" class="calc-slider" min="50000" max="2000000" step="10000" value="500000">
+                        <div class="calc-range">
+                            <span>$50K</span>
+                            <span>$2M</span>
+                        </div>
+                    </div>
+                    <div class="calc-group">
+                        <label class="calc-label">
+                            <span>Interest Rate</span>
+                            <span class="calc-value" id="interestRateDisplay">6.00%</span>
+                        </label>
+                        <input type="range" id="interestRate" class="calc-slider" min="2" max="12" step="0.1" value="6">
+                        <div class="calc-range">
+                            <span>2%</span>
+                            <span>12%</span>
+                        </div>
+                    </div>
+                    <div class="calc-group">
+                        <label class="calc-label">
+                            <span>Loan Term</span>
+                            <span class="calc-value" id="loanTermDisplay">30 years</span>
+                        </label>
+                        <input type="range" id="loanTerm" class="calc-slider" min="1" max="30" step="1" value="30">
+                        <div class="calc-range">
+                            <span>1 year</span>
+                            <span>30 years</span>
+                        </div>
+                    </div>
+                    <div class="calc-group">
+                        <label class="calc-label">
+                            <span>Repayment Frequency</span>
+                        </label>
+                        <div class="calc-toggle-group">
+                            <button class="calc-toggle active" data-freq="monthly">Monthly</button>
+                            <button class="calc-toggle" data-freq="fortnightly">Fortnightly</button>
+                            <button class="calc-toggle" data-freq="weekly">Weekly</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="calc-results">
+                    <div class="calc-result-main">
+                        <span class="calc-result-label">Your estimated repayment</span>
+                        <span class="calc-result-amount" id="repaymentAmount">$2,998</span>
+                        <span class="calc-result-freq" id="repaymentFreq">per month</span>
+                    </div>
+                    <div class="calc-breakdown">
+                        <div class="calc-breakdown-item">
+                            <span>Total Repayments</span>
+                            <span id="totalRepayments">$1,079,191</span>
+                        </div>
+                        <div class="calc-breakdown-item">
+                            <span>Total Interest</span>
+                            <span id="totalInterest">$579,191</span>
+                        </div>
+                        <div class="calc-breakdown-item">
+                            <span>Principal</span>
+                            <span id="principalAmount">$500,000</span>
+                        </div>
+                    </div>
+                    <div class="calc-chart">
+                        <canvas id="calcChart" width="220" height="220"></canvas>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-dot" style="background: #0071E3;"></span>
+                                Principal
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot" style="background: #86B6F6;"></span>
+                                Interest
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#contact" class="btn btn-primary btn-block">
+                        Get a Personalised Quote
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <p class="calc-disclaimer">*This calculator provides estimates only. Contact us for an accurate quote based on your circumstances.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content animate-on-scroll">
+                    <span class="section-tag">About Us</span>
+                    <h2 class="section-title">Your finance partner<br>in Adelaide.</h2>
+                    <p class="about-text">At LoanMate Finance, we believe everyone deserves access to great finance. Based in Adelaide, we work with over 30 lenders to find you the best deal — not the one that benefits the bank.</p>
+                    <p class="about-text">Our approach is simple: listen first, then deliver. We take the time to understand your unique situation, compare hundreds of products, and guide you every step of the way.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="feature-check">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 10l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span>No cost to you — lenders pay us</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feature-check">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 10l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span>Access to 30+ lender panel</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feature-check">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 10l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span>Available after hours & weekends</span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feature-check">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 10l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span>End-to-end support from application to settlement</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual animate-on-scroll">
+                    <div class="about-card-stack">
+                        <div class="about-stat-card">
+                            <div class="about-stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="about-stat-number">30+</div>
+                            <div class="about-stat-text">Lender Partners</div>
+                        </div>
+                        <div class="about-stat-card">
+                            <div class="about-stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <polyline points="22,4 12,14.01 9,11.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="about-stat-number">98%</div>
+                            <div class="about-stat-text">Approval Rate</div>
+                        </div>
+                        <div class="about-stat-card">
+                            <div class="about-stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 8v4l3 3M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="about-stat-number">24hr</div>
+                            <div class="about-stat-text">Pre-Approval</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Testimonials</span>
+                <h2 class="section-title">What our clients<br>are saying.</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card animate-on-scroll" data-delay="0">
+                    <div class="testimonial-stars">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                    </div>
+                    <p class="testimonial-text">"Sandeep made the whole process so easy. As first home buyers, we were nervous, but he guided us through every step. Got us a great rate too!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div>
+                            <div class="author-name">James & Mia</div>
+                            <div class="author-role">First Home Buyers</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll" data-delay="150">
+                    <div class="testimonial-stars">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                    </div>
+                    <p class="testimonial-text">"Refinanced our home and saved over $400 a month. Sandeep handled everything and even sorted out our car loan at the same time. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RP</div>
+                        <div>
+                            <div class="author-name">Rachel P.</div>
+                            <div class="author-role">Refinance Client</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll" data-delay="300">
+                    <div class="testimonial-stars">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="#F59E0B"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.28l-4.77 2.51.91-5.32L2.27 6.7l5.34-.78L10 1z"/></svg>
+                    </div>
+                    <p class="testimonial-text">"Needed commercial finance for our new warehouse. Other brokers said it couldn't be done. Sandeep found a solution within a week. Absolute legend."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DK</div>
+                        <div>
+                            <div class="author-name">David K.</div>
+                            <div class="author-role">Business Owner</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info animate-on-scroll">
+                    <span class="section-tag">Get in Touch</span>
+                    <h2 class="section-title">Let's find your<br>perfect loan.</h2>
+                    <p class="contact-text">Book a free consultation today. No obligations, no jargon — just straightforward advice tailored to your goals.</p>
+                    <div class="contact-details">
+                        <a href="tel:0410867001" class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-item-label">Phone</div>
+                                <div class="contact-item-value">0410 867 001</div>
+                            </div>
+                        </a>
+                        <a href="mailto:Sandeep@loanmatefinance.com.au" class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-item-label">Email</div>
+                                <div class="contact-item-value">Sandeep@loanmatefinance.com.au</div>
+                            </div>
+                        </a>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-item-label">Location</div>
+                                <div class="contact-item-value">Lightsview 5085, SA</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrap animate-on-scroll">
+                    <form id="contactForm" class="contact-form">
+                        <h3 class="form-title">Send us a message</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required placeholder="Smith">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="04XX XXX XXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="loanType">Loan Type</label>
+                            <select id="loanType" name="loanType" required>
+                                <option value="" disabled selected>Select a loan type</option>
+                                <option value="Home Loan">Home Loan</option>
+                                <option value="Car Loan">Car Loan</option>
+                                <option value="Asset Finance">Asset Finance</option>
+                                <option value="Commercial Finance">Commercial Finance</option>
+                                <option value="Personal Loan">Personal Loan</option>
+                                <option value="SMSF Loan">SMSF Loan</option>
+                                <option value="Refinancing">Refinancing</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Tell us about your finance needs..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-submit" id="submitBtn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading" style="display:none;">
+                                <svg class="spinner" width="20" height="20" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="50" stroke-dashoffset="25"/>
+                                </svg>
+                                Sending...
+                            </span>
+                        </button>
+                        <div class="form-success" id="formSuccess" style="display:none;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="#22C55E" stroke-width="2"/>
+                                <path d="M8 12l2.5 2.5L16 9" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <p>Thank you! We'll be in touch within 24 hours.</p>
+                        </div>
+                        <div class="form-error" id="formError" style="display:none;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="#EF4444" stroke-width="2"/>
+                                <path d="M15 9l-6 6M9 9l6 6" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <p>Something went wrong. Please call us at <a href="tel:0410867001">0410 867 001</a>.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="nav-logo">
+                        <div class="logo-icon">
+                            <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+                                <path d="M14 2L2 10v12a2 2 0 002 2h6v-8h8v8h6a2 2 0 002-2V10L14 2z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <span>LoanMate Finance</span>
+                    </div>
+                    <p class="footer-tagline">Expert mortgage broking services in Adelaide. Finding the right loan for every Australian.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <a href="#services">Home Loans</a>
+                    <a href="#services">Car Loans</a>
+                    <a href="#services">Asset Finance</a>
+                    <a href="#services">Commercial Finance</a>
+                    <a href="#services">Personal Loans</a>
+                    <a href="#services">SMSF Loans</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#about">About Us</a>
+                    <a href="#calculator">Calculator</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <a href="tel:0410867001">0410 867 001</a>
+                    <a href="mailto:Sandeep@loanmatefinance.com.au">Sandeep@loanmatefinance.com.au</a>
+                    <span>Lightsview 5085, SA</span>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 LoanMate Finance. All rights reserved.</p>
+                <p class="footer-disclaimer">LoanMate Finance Pty Ltd. Australian Credit Licence. Your full financial situation would need to be reviewed prior to acceptance of any offer or product.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="firebase-config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
