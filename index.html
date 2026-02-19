@@ -33,6 +33,7 @@
             <div class="nav-links" id="navLinks">
                 <a href="#services">Services</a>
                 <a href="#calculator">Calculator</a>
+                <a href="#borrowing">Borrowing Power</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
                 <a href="privacy.html" class="nav-link-privacy">Privacy</a>
@@ -378,6 +379,148 @@
                         </svg>
                     </a>
                     <p class="calc-disclaimer">*This calculator provides estimates only. Contact us for an accurate quote based on your circumstances.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Borrowing Power Calculator -->
+    <section class="borrowing-calc" id="borrowing">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Borrowing Power</span>
+                <h2 class="section-title">How much could<br>you borrow?</h2>
+                <p class="section-subtitle">Get an instant estimate of your borrowing capacity based on your income and expenses. This gives you a starting point — we'll refine it together.</p>
+            </div>
+            <div class="borrow-card animate-on-scroll">
+                <div class="borrow-inputs">
+                    <!-- Employment Type -->
+                    <div class="calc-group">
+                        <label class="calc-label">
+                            <span>Employment Type</span>
+                        </label>
+                        <div class="calc-toggle-group">
+                            <button class="calc-toggle borrow-emp active" data-emp="payg">PAYG</button>
+                            <button class="calc-toggle borrow-emp" data-emp="self">Self-Employed</button>
+                        </div>
+                    </div>
+
+                    <!-- Gross Annual Income -->
+                    <div class="calc-group">
+                        <label class="calc-label">
+                            <span>Gross Annual Income</span>
+                            <span class="calc-value" id="borrowIncomeDisplay">$100,000</span>
+                        </label>
+                        <input type="range" id="borrowIncome" class="calc-slider" min="30000" max="500000" step="5000" value="100000">
+                        <div class="calc-range">
+                            <span>$30K</span>
+                            <span>$500K</span>
+                        </div>
+                    </div>
+
+                    <!-- Partner Income (optional) -->
+                    <div class="calc-group">
+                        <label class="calc-label">
+                            <span>Partner Income (optional)</span>
+                            <span class="calc-value" id="borrowPartnerDisplay">$0</span>
+                        </label>
+                        <input type="range" id="borrowPartner" class="calc-slider" min="0" max="500000" step="5000" value="0">
+                        <div class="calc-range">
+                            <span>$0</span>
+                            <span>$500K</span>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Living Expenses -->
+                    <div class="calc-group">
+                        <label class="calc-label">
+                            <span>Monthly Living Expenses</span>
+                            <span class="calc-value" id="borrowExpensesDisplay">$3,000</span>
+                        </label>
+                        <input type="range" id="borrowExpenses" class="calc-slider" min="500" max="15000" step="100" value="3000">
+                        <div class="calc-range">
+                            <span>$500</span>
+                            <span>$15K</span>
+                        </div>
+                    </div>
+
+                    <!-- Existing Monthly Repayments -->
+                    <div class="calc-group">
+                        <label class="calc-label">
+                            <span>Existing Monthly Repayments</span>
+                            <span class="calc-value" id="borrowDebtsDisplay">$0</span>
+                        </label>
+                        <input type="range" id="borrowDebts" class="calc-slider" min="0" max="10000" step="100" value="0">
+                        <div class="calc-range">
+                            <span>$0</span>
+                            <span>$10K</span>
+                        </div>
+                    </div>
+
+                    <!-- Number of Dependants -->
+                    <div class="calc-group">
+                        <label class="calc-label">
+                            <span>Dependants</span>
+                            <span class="calc-value" id="borrowDependantsDisplay">0</span>
+                        </label>
+                        <input type="range" id="borrowDependants" class="calc-slider" min="0" max="6" step="1" value="0">
+                        <div class="calc-range">
+                            <span>0</span>
+                            <span>6</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="borrow-results">
+                    <div class="borrow-result-main">
+                        <span class="borrow-result-label">Estimated borrowing power</span>
+                        <span class="borrow-result-amount" id="borrowResult">$0</span>
+                        <span class="borrow-result-sub">approximate maximum loan amount</span>
+                    </div>
+
+                    <div class="borrow-breakdown">
+                        <div class="borrow-breakdown-item">
+                            <span>Monthly Net Income</span>
+                            <span id="borrowNetIncome">$0</span>
+                        </div>
+                        <div class="borrow-breakdown-item">
+                            <span>Monthly Expenses + Debts</span>
+                            <span id="borrowTotalExpenses">$0</span>
+                        </div>
+                        <div class="borrow-breakdown-item">
+                            <span>Available for Repayments</span>
+                            <span id="borrowAvailable" class="borrow-highlight">$0</span>
+                        </div>
+                        <div class="borrow-breakdown-item">
+                            <span>Assessment Rate Used</span>
+                            <span id="borrowAssessRate">8.50%</span>
+                        </div>
+                    </div>
+
+                    <!-- Visual Meter -->
+                    <div class="borrow-meter">
+                        <div class="borrow-meter-label">
+                            <span>$0</span>
+                            <span>$2M+</span>
+                        </div>
+                        <div class="borrow-meter-track">
+                            <div class="borrow-meter-fill" id="borrowMeterFill"></div>
+                            <div class="borrow-meter-marker" id="borrowMeterMarker"></div>
+                        </div>
+                        <div class="borrow-meter-zones">
+                            <span class="zone-label zone-conservative">Conservative</span>
+                            <span class="zone-label zone-comfortable">Comfortable</span>
+                            <span class="zone-label zone-stretch">Stretch</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn btn-primary btn-block">
+                        Get an Accurate Assessment
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <p class="calc-disclaimer">*This is an estimate only based on general lending criteria. Actual borrowing capacity depends on lender assessment, credit history, and individual circumstances. Contact us for a personalised assessment.</p>
                 </div>
             </div>
         </div>

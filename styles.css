@@ -871,6 +871,176 @@ input, textarea, select {
     margin-top: var(--spacing-md);
 }
 
+/* --- Borrowing Power Calculator --- */
+.borrowing-calc {
+    padding: var(--spacing-5xl) 0;
+    background: var(--color-bg-secondary);
+}
+
+.borrow-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-3xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.borrow-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.borrow-result-main {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.borrow-result-label {
+    display: block;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.borrow-result-amount {
+    display: block;
+    font-size: clamp(var(--font-size-4xl), 5vw, var(--font-size-5xl));
+    font-weight: 700;
+    color: var(--color-dark);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    transition: all 0.3s ease;
+}
+
+.borrow-result-sub {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    margin-top: 4px;
+}
+
+.borrow-breakdown {
+    width: 100%;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.borrow-breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: var(--font-size-sm);
+}
+
+.borrow-breakdown-item span:first-child {
+    color: var(--color-text-secondary);
+}
+
+.borrow-breakdown-item span:last-child {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.borrow-breakdown-item + .borrow-breakdown-item {
+    border-top: 1px solid var(--color-border-light);
+}
+
+.borrow-highlight {
+    color: var(--color-primary) !important;
+}
+
+/* Borrowing Power Meter */
+.borrow-meter {
+    width: 100%;
+    margin-bottom: var(--spacing-xl);
+}
+
+.borrow-meter-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    margin-bottom: 6px;
+}
+
+.borrow-meter-track {
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(90deg, #22C55E 0%, #22C55E 33%, #F59E0B 33%, #F59E0B 66%, #EF4444 66%, #EF4444 100%);
+    border-radius: var(--radius-full);
+    position: relative;
+    overflow: visible;
+}
+
+.borrow-meter-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-full);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.borrow-meter-marker {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 3px solid var(--color-dark);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+}
+
+.borrow-meter-zones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+}
+
+.zone-label {
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+}
+
+.zone-conservative {
+    color: #22C55E;
+}
+
+.zone-comfortable {
+    color: #F59E0B;
+    text-align: center;
+}
+
+.zone-stretch {
+    color: #EF4444;
+    text-align: right;
+}
+
+@media (max-width: 1024px) {
+    .borrow-card {
+        grid-template-columns: 1fr;
+        padding: var(--spacing-2xl);
+    }
+}
+
+@media (max-width: 480px) {
+    .borrow-card {
+        padding: var(--spacing-lg);
+    }
+}
+
 /* --- About Section --- */
 .about {
     padding: var(--spacing-5xl) 0;

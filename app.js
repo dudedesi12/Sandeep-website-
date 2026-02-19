@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initScrollAnimations();
     initCalculator();
+    initBorrowingCalc();
     initContactForm();
     initCounterAnimation();
     initCookieConsent();
@@ -337,6 +338,140 @@ function initCalculator() {
 
     // Initial calculation
     calculate();
+}
+
+/* --- Borrowing Power Calculator --- */
+function initBorrowingCalc() {
+    const incomeSlider = document.getElementById('borrowIncome');
+    const partnerSlider = document.getElementById('borrowPartner');
+    const expensesSlider = document.getElementById('borrowExpenses');
+    const debtsSlider = document.getElementById('borrowDebts');
+    const dependantsSlider = document.getElementById('borrowDependants');
+    const empButtons = document.querySelectorAll('.borrow-emp');
+
+    if (!incomeSlider) return;
+
+    let employmentType = 'payg';
+
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('en-AU', {
+            style: 'currency',
+            currency: 'AUD',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        }).format(amount);
+    }
+
+    function updateSliderFill(slider) {
+        const min = parseFloat(slider.min);
+        const max = parseFloat(slider.max);
+        const val = parseFloat(slider.value);
+        const percentage = ((val - min) / (max - min)) * 100;
+        slider.style.background = `linear-gradient(to right, #0071E3 0%, #0071E3 ${percentage}%, #E8E8ED ${percentage}%, #E8E8ED 100%)`;
+    }
+
+    function calculateBorrowing() {
+        const grossIncome = parseFloat(incomeSlider.value);
+        const partnerIncome = parseFloat(partnerSlider.value);
+        const monthlyExpenses = parseFloat(expensesSlider.value);
+        const monthlyDebts = parseFloat(debtsSlider.value);
+        const dependants = parseInt(dependantsSlider.value);
+
+        // Update displays
+        document.getElementById('borrowIncomeDisplay').textContent = formatCurrency(grossIncome);
+        document.getElementById('borrowPartnerDisplay').textContent = formatCurrency(partnerIncome);
+        document.getElementById('borrowExpensesDisplay').textContent = formatCurrency(monthlyExpenses);
+        document.getElementById('borrowDebtsDisplay').textContent = formatCurrency(monthlyDebts);
+        document.getElementById('borrowDependantsDisplay').textContent = dependants;
+
+        // Update slider fills
+        [incomeSlider, partnerSlider, expensesSlider, debtsSlider, dependantsSlider].forEach(updateSliderFill);
+
+        // --- Calculation logic ---
+        // Total gross annual income
+        const totalGross = grossIncome + partnerIncome;
+
+        // Tax estimate (simplified Australian brackets)
+        function estimateTax(income) {
+            if (income <= 18200) return 0;
+            if (income <= 45000) return (income - 18200) * 0.19;
+            if (income <= 120000) return 5092 + (income - 45000) * 0.325;
+            if (income <= 180000) return 29467 + (income - 120000) * 0.37;
+            return 51667 + (income - 180000) * 0.45;
+        }
+
+        const taxPrimary = estimateTax(grossIncome);
+        const taxPartner = estimateTax(partnerIncome);
+        const totalNet = totalGross - taxPrimary - taxPartner;
+        const monthlyNet = totalNet / 12;
+
+        // Dependant cost (HEM-style estimate: ~$400/month per dependant)
+        const dependantCost = dependants * 400;
+
+        // Total monthly commitments
+        const totalMonthlyExpenses = monthlyExpenses + monthlyDebts + dependantCost;
+
+        // Available for repayments
+        const available = Math.max(0, monthlyNet - totalMonthlyExpenses);
+
+        // Lenders typically use 30% of gross monthly income as a cap
+        const grossMonthlyLimit = (totalGross / 12) * 0.30;
+
+        // Use the lower of: available income or 30% gross cap
+        const serviceability = Math.min(available, grossMonthlyLimit);
+
+        // Assessment rate (buffer above current rates)
+        const assessmentRate = 0.085; // 8.5% p.a.
+        const monthlyAssessRate = assessmentRate / 12;
+        const loanTermMonths = 30 * 12; // 30-year term
+
+        // Self-employed gets ~80% of PAYG capacity (lenders apply stricter criteria)
+        const empMultiplier = employmentType === 'self' ? 0.80 : 1.0;
+
+        // Reverse mortgage formula: PV = PMT * [(1 - (1+r)^-n) / r]
+        let borrowingPower = 0;
+        if (monthlyAssessRate > 0 && serviceability > 0) {
+            borrowingPower = serviceability *
+                ((1 - Math.pow(1 + monthlyAssessRate, -loanTermMonths)) / monthlyAssessRate);
+            borrowingPower *= empMultiplier;
+        }
+
+        // Cap at reasonable maximum
+        borrowingPower = Math.max(0, Math.min(borrowingPower, 3000000));
+
+        // Update result display
+        document.getElementById('borrowResult').textContent = formatCurrency(Math.round(borrowingPower));
+        document.getElementById('borrowNetIncome').textContent = formatCurrency(Math.round(monthlyNet));
+        document.getElementById('borrowTotalExpenses').textContent = formatCurrency(Math.round(totalMonthlyExpenses));
+        document.getElementById('borrowAvailable').textContent = formatCurrency(Math.round(serviceability));
+        document.getElementById('borrowAssessRate').textContent = '8.50%';
+
+        // Update meter
+        const meterMax = 2000000;
+        const meterPercent = Math.min((borrowingPower / meterMax) * 100, 100);
+        const meterFill = document.getElementById('borrowMeterFill');
+        const meterMarker = document.getElementById('borrowMeterMarker');
+        if (meterFill) meterFill.style.width = meterPercent + '%';
+        if (meterMarker) meterMarker.style.left = meterPercent + '%';
+    }
+
+    // Slider event listeners
+    [incomeSlider, partnerSlider, expensesSlider, debtsSlider, dependantsSlider].forEach(slider => {
+        slider.addEventListener('input', calculateBorrowing);
+    });
+
+    // Employment type toggle
+    empButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            empButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            employmentType = btn.dataset.emp;
+            calculateBorrowing();
+        });
+    });
+
+    // Initial calculation
+    calculateBorrowing();
 }
 
 /* --- Contact Form with Firebase + Security --- */
