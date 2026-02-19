@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCalculator();
     initBorrowingCalc();
     initMultiStepForm();
+    initFAQ();
     initContactForm();
     initCounterAnimation();
     initCookieConsent();
@@ -843,6 +844,53 @@ function initMultiStepForm() {
 
     // Initialize
     goToStep(1);
+}
+
+/* --- FAQ Accordion --- */
+function initFAQ() {
+    const tabs = document.querySelectorAll('.faq-tab');
+    const items = document.querySelectorAll('.faq-item');
+
+    if (!tabs.length) return;
+
+    // Category filter
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const category = tab.dataset.category;
+            items.forEach(item => {
+                item.classList.remove('open');
+                if (item.dataset.category === category) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Accordion toggle
+    items.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            const wasOpen = item.classList.contains('open');
+
+            // Close all in the same category
+            const category = item.dataset.category;
+            items.forEach(i => {
+                if (i.dataset.category === category) {
+                    i.classList.remove('open');
+                }
+            });
+
+            // Toggle clicked
+            if (!wasOpen) {
+                item.classList.add('open');
+            }
+        });
+    });
 }
 
 /* --- Contact Form with Firebase + Security --- */
