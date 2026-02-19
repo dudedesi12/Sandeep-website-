@@ -8,7 +8,74 @@ document.addEventListener('DOMContentLoaded', () => {
     initCalculator();
     initContactForm();
     initCounterAnimation();
+    initCookieConsent();
 });
+
+/* ============================================
+   Security Utilities
+   ============================================ */
+
+/**
+ * Sanitize user input — strips HTML tags and trims whitespace.
+ * Prevents XSS from form submissions stored in Firebase.
+ */
+function sanitizeInput(str) {
+    if (typeof str !== 'string') return '';
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .trim();
+}
+
+/**
+ * Validate email format using a reasonable regex.
+ */
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+/**
+ * Validate Australian phone numbers (mobile or landline).
+ */
+function isValidAusPhone(phone) {
+    const cleaned = phone.replace(/[\s\-().]/g, '');
+    return /^(\+?61|0)[2-9]\d{8}$/.test(cleaned);
+}
+
+/**
+ * Rate limiter — prevents rapid-fire form submissions.
+ * Returns true if the action is allowed, false if rate-limited.
+ */
+const RateLimiter = (() => {
+    const attempts = {};
+    const MAX_ATTEMPTS = 3;       // max submissions
+    const WINDOW_MS = 5 * 60 * 1000; // per 5-minute window
+
+    return {
+        isAllowed(key) {
+            const now = Date.now();
+            if (!attempts[key]) {
+                attempts[key] = [];
+            }
+            // Remove expired entries
+            attempts[key] = attempts[key].filter(t => now - t < WINDOW_MS);
+            if (attempts[key].length >= MAX_ATTEMPTS) {
+                return false;
+            }
+            attempts[key].push(now);
+            return true;
+        },
+        getWaitTime(key) {
+            if (!attempts[key] || attempts[key].length === 0) return 0;
+            const oldest = attempts[key][0];
+            const remaining = WINDOW_MS - (Date.now() - oldest);
+            return Math.max(0, Math.ceil(remaining / 1000));
+        }
+    };
+})();
 
 /* --- Navigation --- */
 function initNavigation() {
@@ -272,9 +339,11 @@ function initCalculator() {
     calculate();
 }
 
-/* --- Contact Form with Firebase --- */
+/* --- Contact Form with Firebase + Security --- */
 function initContactForm() {
     const form = document.getElementById('contactForm');
+    if (!form) return;
+
     const submitBtn = document.getElementById('submitBtn');
     const btnText = submitBtn.querySelector('.btn-text');
     const btnLoading = submitBtn.querySelector('.btn-loading');
@@ -288,20 +357,81 @@ function initContactForm() {
         formSuccess.style.display = 'none';
         formError.style.display = 'none';
 
+        // --- SECURITY: Honeypot check ---
+        const honeypot = document.getElementById('website');
+        if (honeypot && honeypot.value.length > 0) {
+            // Bot detected — silently pretend success
+            formSuccess.style.display = 'flex';
+            form.reset();
+            return;
+        }
+
+        // --- SECURITY: Rate limiting ---
+        if (!RateLimiter.isAllowed('contactForm')) {
+            const wait = RateLimiter.getWaitTime('contactForm');
+            formError.querySelector('p').textContent =
+                `Too many submissions. Please wait ${Math.ceil(wait / 60)} minute(s) and try again.`;
+            formError.style.display = 'flex';
+            return;
+        }
+
+        // --- SECURITY: Privacy consent check ---
+        const consentBox = document.getElementById('privacyConsent');
+        if (consentBox && !consentBox.checked) {
+            formError.querySelector('p').textContent =
+                'Please agree to the Privacy Policy before submitting.';
+            formError.style.display = 'flex';
+            return;
+        }
+
+        // --- VALIDATION ---
+        const firstName = sanitizeInput(document.getElementById('firstName').value);
+        const lastName = sanitizeInput(document.getElementById('lastName').value);
+        const email = sanitizeInput(document.getElementById('email').value);
+        const phone = sanitizeInput(document.getElementById('phone').value);
+        const loanType = sanitizeInput(document.getElementById('loanType').value);
+        const message = sanitizeInput(document.getElementById('message').value);
+
+        if (!firstName || !lastName) {
+            formError.querySelector('p').textContent = 'Please enter your full name.';
+            formError.style.display = 'flex';
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            formError.querySelector('p').textContent = 'Please enter a valid email address.';
+            formError.style.display = 'flex';
+            return;
+        }
+
+        if (!isValidAusPhone(phone)) {
+            formError.querySelector('p').textContent = 'Please enter a valid Australian phone number.';
+            formError.style.display = 'flex';
+            return;
+        }
+
+        if (!loanType) {
+            formError.querySelector('p').textContent = 'Please select a loan type.';
+            formError.style.display = 'flex';
+            return;
+        }
+
         // Show loading
         btnText.style.display = 'none';
         btnLoading.style.display = 'inline-flex';
         submitBtn.disabled = true;
 
-        // Collect form data
+        // Collect sanitized form data
         const formData = {
-            firstName: document.getElementById('firstName').value.trim(),
-            lastName: document.getElementById('lastName').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            phone: document.getElementById('phone').value.trim(),
-            loanType: document.getElementById('loanType').value,
-            message: document.getElementById('message').value.trim(),
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phone: phone,
+            loanType: loanType,
+            message: message,
+            privacyConsent: true,
             submittedAt: new Date().toISOString(),
+            source: 'website-contact-form',
             status: 'new'
         };
 
@@ -311,7 +441,6 @@ function initContactForm() {
                 const { collection, addDoc } = await import('https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js');
                 await addDoc(collection(window.firebaseDB, 'enquiries'), formData);
             } else {
-                // Fallback: use Firestore REST API
                 const projectId = 'sandeepweb-21c9f';
                 const response = await fetch(
                     `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/enquiries`,
@@ -326,7 +455,9 @@ function initContactForm() {
                                 phone: { stringValue: formData.phone },
                                 loanType: { stringValue: formData.loanType },
                                 message: { stringValue: formData.message },
+                                privacyConsent: { booleanValue: true },
                                 submittedAt: { stringValue: formData.submittedAt },
+                                source: { stringValue: formData.source },
                                 status: { stringValue: formData.status }
                             }
                         })
@@ -339,8 +470,14 @@ function initContactForm() {
             formSuccess.style.display = 'flex';
             form.reset();
 
+            // Reset error message back to default
+            formError.querySelector('p').innerHTML =
+                'Something went wrong. Please call us at <a href="tel:0410867001">0410 867 001</a>.';
+
         } catch (error) {
             console.error('Form submission error:', error);
+            formError.querySelector('p').innerHTML =
+                'Something went wrong. Please call us at <a href="tel:0410867001">0410 867 001</a>.';
             formError.style.display = 'flex';
         } finally {
             btnText.style.display = 'inline';
@@ -348,4 +485,51 @@ function initContactForm() {
             submitBtn.disabled = false;
         }
     });
+}
+
+/* --- Cookie Consent --- */
+function initCookieConsent() {
+    const banner = document.getElementById('cookieBanner');
+    if (!banner) return;
+
+    const acceptBtn = document.getElementById('cookieAccept');
+    const declineBtn = document.getElementById('cookieDecline');
+
+    // Check if user already made a choice
+    const consent = localStorage.getItem('lm_cookie_consent');
+    if (consent !== null) {
+        // Already decided — don't show banner
+        if (consent === 'accepted') {
+            enableAnalytics();
+        }
+        return;
+    }
+
+    // Show banner after a short delay (less intrusive)
+    setTimeout(() => {
+        banner.classList.add('visible');
+    }, 1500);
+
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('lm_cookie_consent', 'accepted');
+        banner.classList.remove('visible');
+        enableAnalytics();
+    });
+
+    declineBtn.addEventListener('click', () => {
+        localStorage.setItem('lm_cookie_consent', 'declined');
+        banner.classList.remove('visible');
+        disableAnalytics();
+    });
+}
+
+function enableAnalytics() {
+    // Google Analytics is loaded via firebase-config.js
+    // This ensures it's allowed to run
+    window['ga-disable-G-C9X9RY7Y7C'] = false;
+}
+
+function disableAnalytics() {
+    // Disable Google Analytics tracking
+    window['ga-disable-G-C9X9RY7Y7C'] = true;
 }

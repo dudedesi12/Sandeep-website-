@@ -1301,6 +1301,292 @@ a.contact-item:hover {
     line-height: 1.5;
 }
 
+/* --- Honeypot (anti-spam, hidden from users) --- */
+.form-hp {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --- Privacy Consent Checkbox --- */
+.form-consent {
+    margin-bottom: var(--spacing-md);
+}
+
+.consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+}
+
+.consent-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.consent-checkmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+    background: white;
+    transition: all var(--transition-fast);
+    margin-top: 1px;
+}
+
+.consent-label input[type="checkbox"]:checked + .consent-checkmark {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.consent-label input[type="checkbox"]:checked + .consent-checkmark::after {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+}
+
+.consent-label input[type="checkbox"]:focus-visible + .consent-checkmark {
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2);
+}
+
+.consent-text {
+    flex: 1;
+}
+
+.consent-text a {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.consent-text a:hover {
+    color: var(--color-primary-hover);
+}
+
+/* --- Cookie Consent Banner --- */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: rgba(29, 29, 31, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cookie-banner.visible {
+    transform: translateY(0);
+}
+
+.cookie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-xl);
+}
+
+.cookie-text {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex: 1;
+}
+
+.cookie-icon {
+    color: rgba(255, 255, 255, 0.6);
+    flex-shrink: 0;
+}
+
+.cookie-text p {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.cookie-text a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.cookie-text a:hover {
+    color: white;
+}
+
+.cookie-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-shrink: 0;
+}
+
+.btn-cookie-decline {
+    padding: 8px 20px;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-cookie-decline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.btn-cookie-accept {
+    padding: 8px 20px;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: white;
+    background: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-cookie-accept:hover {
+    background: var(--color-primary-hover);
+    transform: scale(1.02);
+}
+
+/* --- Privacy Policy Page --- */
+.privacy-page {
+    padding: 120px 0 var(--spacing-4xl);
+}
+
+.privacy-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.privacy-updated {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    margin-top: var(--spacing-sm);
+}
+
+.privacy-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.privacy-section {
+    margin-bottom: var(--spacing-2xl);
+    padding-bottom: var(--spacing-2xl);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.privacy-section:last-child {
+    border-bottom: none;
+}
+
+.privacy-section h2 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -0.01em;
+}
+
+.privacy-section h3 {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+}
+
+.privacy-section p {
+    font-size: var(--font-size-sm);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.privacy-section ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+.privacy-section ul li {
+    font-size: var(--font-size-sm);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    padding: 4px 0 4px 20px;
+    position: relative;
+}
+
+.privacy-section ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.privacy-section a {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.privacy-section a:hover {
+    color: var(--color-primary-hover);
+}
+
+.privacy-contact-card {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    margin-top: var(--spacing-md);
+}
+
+.privacy-contact-card p {
+    margin-bottom: var(--spacing-xs);
+}
+
+.privacy-back {
+    text-align: center;
+    margin-top: var(--spacing-3xl);
+}
+
 /* --- Scroll Animations --- */
 .animate-on-scroll {
     opacity: 0;
@@ -1440,6 +1726,21 @@ a.contact-item:hover {
 
     .hero-actions .btn {
         text-align: center;
+    }
+
+    .cookie-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-md);
+    }
+
+    .cookie-text {
+        flex-direction: column;
+    }
+
+    .cookie-actions {
+        width: 100%;
+        justify-content: center;
     }
 }
 
