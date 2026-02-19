@@ -2360,6 +2360,8 @@ a.contact-item:hover {
 }
 
 /* --- Responsive Design --- */
+
+/* ---- Tablet (max-width: 1024px) ---- */
 @media (max-width: 1024px) {
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2375,6 +2377,10 @@ a.contact-item:hover {
         gap: var(--spacing-2xl);
     }
 
+    .about-visual {
+        order: -1;
+    }
+
     .testimonials-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2383,9 +2389,27 @@ a.contact-item:hover {
         grid-template-columns: 1fr 1fr;
         gap: var(--spacing-xl);
     }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Reduce section padding on tablets */
+    .services,
+    .calculator,
+    .borrowing-calc,
+    .about,
+    .testimonials,
+    .contact,
+    .faq,
+    .enquiry {
+        padding: var(--spacing-4xl) 0;
+    }
 }
 
+/* ---- Mobile (max-width: 768px) ---- */
 @media (max-width: 768px) {
+    /* -- Navigation -- */
     .nav-links {
         display: none;
         position: fixed;
@@ -2395,9 +2419,12 @@ a.contact-item:hover {
         bottom: 0;
         background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
-        padding: var(--spacing-2xl);
-        gap: var(--spacing-lg);
+        padding: var(--spacing-2xl) var(--spacing-xl);
+        gap: var(--spacing-xs);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .nav-links.open {
@@ -2405,27 +2432,77 @@ a.contact-item:hover {
     }
 
     .nav-links a {
-        font-size: var(--font-size-xl);
+        font-size: var(--font-size-lg);
         font-weight: 500;
         color: var(--color-text);
+        padding: var(--spacing-sm) 0;
+        border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .nav-links a:last-child {
+        border-bottom: none;
     }
 
     .nav-cta {
-        align-self: flex-start;
+        align-self: stretch;
+        text-align: center;
         font-size: var(--font-size-base) !important;
+        padding: 12px 24px !important;
+        margin-top: var(--spacing-md);
+        border-bottom: none !important;
     }
 
     .nav-toggle {
         display: flex;
     }
 
+    /* -- Sections: reduce vertical padding -- */
+    .services,
+    .calculator,
+    .borrowing-calc,
+    .about,
+    .testimonials,
+    .contact,
+    .faq,
+    .enquiry {
+        padding: var(--spacing-3xl) 0;
+    }
+
+    .process {
+        padding: var(--spacing-3xl) 0;
+    }
+
+    .section-header {
+        margin-bottom: var(--spacing-2xl);
+    }
+
+    /* -- Hero -- */
     .hero {
-        padding: 120px 0 60px;
+        padding: 100px 0 50px;
         min-height: auto;
     }
 
     .hero-title {
-        font-size: clamp(2.5rem, 8vw, 3.5rem);
+        font-size: clamp(2.2rem, 8vw, 3.5rem);
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-base);
+    }
+
+    .hero-badge {
+        font-size: var(--font-size-xs);
+        padding: 5px 12px 5px 10px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        margin-bottom: var(--spacing-2xl);
+    }
+
+    .hero-actions .btn {
+        text-align: center;
+        width: 100%;
     }
 
     .hero-stats {
@@ -2438,34 +2515,140 @@ a.contact-item:hover {
     }
 
     .stat {
-        min-width: 100px;
+        min-width: 80px;
     }
 
+    .stat-number {
+        font-size: var(--font-size-2xl);
+    }
+
+    .stat-dollar {
+        font-size: var(--font-size-2xl);
+    }
+
+    .stat-suffix {
+        font-size: var(--font-size-base);
+    }
+
+    /* -- Services -- */
     .services-grid {
         grid-template-columns: 1fr;
     }
 
+    /* -- Process / How It Works -- */
     .process-steps {
         flex-direction: column;
         align-items: center;
     }
 
+    .process-step {
+        max-width: 100%;
+        padding: var(--spacing-lg);
+    }
+
     .process-connector {
         width: 2px;
-        height: 40px;
+        height: 30px;
         margin-top: 0;
     }
 
-    .contact-grid {
+    .step-number {
+        font-size: var(--font-size-4xl);
+    }
+
+    /* -- Calculator -- */
+    .calc-toggle-group {
+        flex-wrap: nowrap;
+    }
+
+    .calc-toggle {
+        padding: 8px 8px;
+        font-size: var(--font-size-xs);
+    }
+
+    .calc-slider::-webkit-slider-thumb {
+        width: 28px;
+        height: 28px;
+    }
+
+    .calc-slider::-moz-range-thumb {
+        width: 28px;
+        height: 28px;
+    }
+
+    .calc-result-amount {
+        font-size: var(--font-size-4xl);
+    }
+
+    .calc-chart canvas {
+        width: 180px;
+        height: 180px;
+    }
+
+    /* -- Borrowing Power -- */
+    .borrow-result-amount {
+        font-size: var(--font-size-4xl);
+    }
+
+    .borrow-meter-zones {
+        font-size: 10px;
+    }
+
+    /* -- About -- */
+    .about-grid {
         grid-template-columns: 1fr;
     }
 
+    .about-visual {
+        order: -1;
+    }
+
+    .about-card-stack {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .about-stat-card {
+        padding: var(--spacing-lg);
+    }
+
+    .about-stat-number {
+        font-size: var(--font-size-2xl);
+    }
+
+    /* -- Testimonials -- */
     .testimonials-grid {
         grid-template-columns: 1fr;
     }
 
+    /* -- Contact -- */
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    /* -- FAQ -- */
+    .faq-tabs {
+        gap: 6px;
+    }
+
+    .faq-tab {
+        padding: 6px 14px;
+        font-size: var(--font-size-xs);
+    }
+
+    .faq-question {
+        font-size: var(--font-size-sm);
+        padding: var(--spacing-md) 0;
+    }
+
+    /* -- Footer -- */
     .footer-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
     }
 
     .footer-bottom {
@@ -2474,20 +2657,14 @@ a.contact-item:hover {
 
     .footer-disclaimer {
         text-align: left;
+        max-width: 100%;
     }
 
-    .form-row {
-        grid-template-columns: 1fr;
+    .footer-tagline {
+        max-width: 100%;
     }
 
-    .hero-actions {
-        flex-direction: column;
-    }
-
-    .hero-actions .btn {
-        text-align: center;
-    }
-
+    /* -- Cookie Banner -- */
     .cookie-content {
         flex-direction: column;
         text-align: center;
@@ -2502,22 +2679,280 @@ a.contact-item:hover {
         width: 100%;
         justify-content: center;
     }
+
+    /* -- Google Reviews Badge -- */
+    .google-reviews-badge {
+        padding: 6px 12px;
+    }
+
+    /* -- Enquiry Form -- */
+    .msf-options {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* -- Privacy Page -- */
+    .privacy-page {
+        padding: 80px 0 var(--spacing-2xl);
+    }
 }
 
+/* ---- Small Mobile (max-width: 480px) ---- */
 @media (max-width: 480px) {
     .container {
         padding: 0 var(--spacing-md);
     }
 
+    /* Even smaller section padding */
+    .services,
+    .calculator,
+    .borrowing-calc,
+    .about,
+    .testimonials,
+    .contact,
+    .faq,
+    .enquiry {
+        padding: var(--spacing-2xl) 0;
+    }
+
+    .process {
+        padding: var(--spacing-2xl) 0;
+    }
+
+    /* Hero */
+    .hero {
+        padding: 90px 0 40px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.8rem, 9vw, 2.5rem);
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .hero-badge {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .hero-actions .btn-lg {
+        padding: 12px 20px;
+        font-size: var(--font-size-sm);
+    }
+
+    .hero-stats {
+        gap: var(--spacing-md);
+    }
+
+    .stat-number {
+        font-size: var(--font-size-xl);
+    }
+
+    .stat-dollar {
+        font-size: var(--font-size-xl);
+    }
+
+    .stat-label {
+        font-size: var(--font-size-xs);
+    }
+
+    /* Section headers */
+    .section-header {
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .section-title {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+
+    .section-subtitle {
+        font-size: var(--font-size-sm);
+    }
+
+    /* Service cards */
     .service-card {
         padding: var(--spacing-xl);
     }
 
+    /* Calculator */
     .calculator-card {
         padding: var(--spacing-lg);
     }
 
+    .calc-result-amount {
+        font-size: var(--font-size-3xl);
+    }
+
+    .calc-chart canvas {
+        width: 150px;
+        height: 150px;
+    }
+
+    .chart-legend {
+        gap: var(--spacing-md);
+    }
+
+    /* Borrowing */
+    .borrow-result-amount {
+        font-size: var(--font-size-3xl);
+    }
+
+    /* About */
+    .about-card-stack {
+        grid-template-columns: 1fr;
+    }
+
+    .about-stat-card:first-child {
+        grid-column: auto;
+    }
+
+    /* Contact */
     .contact-form-wrap {
         padding: var(--spacing-lg);
+    }
+
+    .form-title {
+        font-size: var(--font-size-lg);
+    }
+
+    .contact-item {
+        padding: var(--spacing-sm);
+    }
+
+    .contact-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    /* Enquiry form */
+    .msf-wrapper {
+        padding: var(--spacing-md);
+    }
+
+    .msf-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .msf-options {
+        grid-template-columns: 1fr;
+    }
+
+    .msf-btn-group {
+        gap: 6px;
+    }
+
+    .msf-option-btn {
+        padding: 8px 14px;
+        font-size: var(--font-size-xs);
+    }
+
+    .msf-nav {
+        gap: var(--spacing-sm);
+    }
+
+    .msf-btn-prev,
+    .msf-btn-next,
+    .msf-btn-submit {
+        padding: 10px 18px;
+        font-size: var(--font-size-sm);
+    }
+
+    /* Footer */
+    .footer {
+        padding: var(--spacing-2xl) 0 var(--spacing-md);
+    }
+
+    .footer-links h4 {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    /* FAQ */
+    .faq-tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: var(--spacing-xs);
+    }
+
+    .faq-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .faq-tab {
+        flex-shrink: 0;
+    }
+
+    /* Buttons global */
+    .btn-lg {
+        padding: 12px 22px;
+        font-size: var(--font-size-sm);
+    }
+
+    /* Cookie banner */
+    .cookie-banner {
+        padding: var(--spacing-md);
+    }
+
+    .cookie-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .btn-cookie-decline,
+    .btn-cookie-accept {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Privacy page */
+    .privacy-page {
+        padding: 70px 0 var(--spacing-xl);
+    }
+
+    .privacy-section h2 {
+        font-size: var(--font-size-lg);
+    }
+}
+
+/* ---- Very Small Screens (max-width: 360px) ---- */
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .nav-logo span {
+        font-size: var(--font-size-sm);
+    }
+
+    .logo-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .stat {
+        flex-direction: row;
+        align-items: baseline;
+        gap: var(--spacing-xs);
+    }
+
+    .about-stat-number {
+        font-size: var(--font-size-xl);
+    }
+
+    .calc-toggle {
+        padding: 6px 4px;
+        font-size: 10px;
+    }
+
+    .msf-cards {
+        grid-template-columns: 1fr;
     }
 }
