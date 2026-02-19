@@ -813,6 +813,11 @@ function initMultiStepForm() {
                 if (!response.ok) throw new Error('Failed to submit');
             }
 
+            // Send email notification (non-blocking)
+            if (window.sendEmailNotification) {
+                window.sendEmailNotification(submission);
+            }
+
             showSuccess();
         } catch (error) {
             console.error('Form submission error:', error);
@@ -1024,6 +1029,11 @@ function initContactForm() {
             formSuccess.style.display = 'flex';
             form.reset();
 
+            // Send email notification (non-blocking)
+            if (window.sendEmailNotification) {
+                window.sendEmailNotification(formData);
+            }
+
             // Reset error message back to default
             formError.querySelector('p').innerHTML =
                 'Something went wrong. Please call us at <a href="tel:0410867001">0410 867 001</a>.';
@@ -1078,12 +1088,11 @@ function initCookieConsent() {
 }
 
 function enableAnalytics() {
-    // Google Analytics is loaded via firebase-config.js
-    // This ensures it's allowed to run
     window['ga-disable-G-C9X9RY7Y7C'] = false;
+    if (window.lmAnalytics) window.lmAnalytics.enable();
 }
 
 function disableAnalytics() {
-    // Disable Google Analytics tracking
     window['ga-disable-G-C9X9RY7Y7C'] = true;
+    if (window.lmAnalytics) window.lmAnalytics.disable();
 }
