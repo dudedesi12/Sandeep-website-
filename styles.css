@@ -1471,6 +1471,403 @@ a.contact-item:hover {
     line-height: 1.5;
 }
 
+/* --- Multi-Step Enquiry Form --- */
+.enquiry {
+    padding: var(--spacing-5xl) 0;
+    background: var(--color-bg);
+}
+
+.msf-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-2xl) var(--spacing-3xl);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Progress Bar */
+.msf-progress {
+    margin-bottom: var(--spacing-2xl);
+    position: relative;
+}
+
+.msf-progress-bar {
+    height: 4px;
+    background: var(--color-border-light);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.msf-progress-bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    width: var(--progress, 20%);
+}
+
+.msf-steps-indicator {
+    display: flex;
+    justify-content: space-between;
+}
+
+.msf-step-dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: default;
+}
+
+.msf-step-dot span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    background: var(--color-bg-secondary);
+    color: var(--color-text-tertiary);
+    border: 2px solid var(--color-border-light);
+    transition: all var(--transition-base);
+}
+
+.msf-step-dot.active span {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+.msf-step-dot.completed span {
+    background: var(--color-success);
+    color: white;
+    border-color: var(--color-success);
+}
+
+.msf-step-dot small {
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.msf-step-dot.active small {
+    color: var(--color-primary);
+}
+
+/* Panels */
+.msf-panel {
+    display: none;
+    animation: msfFadeIn 0.4s ease;
+}
+
+.msf-panel.active {
+    display: block;
+}
+
+@keyframes msfFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.msf-panel-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--spacing-xs);
+}
+
+.msf-panel-sub {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Step 1: Card Selector */
+.msf-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.msf-card {
+    cursor: pointer;
+}
+
+.msf-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.msf-card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg) var(--spacing-md);
+    border: 2px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+    text-align: center;
+}
+
+.msf-card-inner:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+}
+
+.msf-card input:checked + .msf-card-inner {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+}
+
+.msf-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--icon-bg);
+    color: var(--icon-color);
+}
+
+.msf-card-label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* Step 2: Option buttons (dynamic) */
+.msf-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--spacing-sm);
+}
+
+.msf-option-select {
+    cursor: pointer;
+}
+
+.msf-option-select input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.msf-option-select .msf-option-label {
+    display: block;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: 2px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    text-align: center;
+    transition: all var(--transition-fast);
+    color: var(--color-text);
+}
+
+.msf-option-select .msf-option-label:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+}
+
+.msf-option-select input:checked + .msf-option-label {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+}
+
+/* Steps 3-4: Button Groups */
+.msf-form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.msf-field label,
+.msf-field-input label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+.msf-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.msf-option-btn {
+    padding: 10px 18px;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
+    border: 2px solid transparent;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.msf-option-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.msf-option-btn.selected {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Step 5: Contact inputs */
+.msf-contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+.msf-full-width {
+    grid-column: 1 / -1;
+}
+
+.msf-field-input input,
+.msf-field-input textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--color-bg-secondary);
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    transition: border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+    outline: none;
+}
+
+.msf-field-input input::placeholder,
+.msf-field-input textarea::placeholder {
+    color: var(--color-text-tertiary);
+}
+
+.msf-field-input input:focus,
+.msf-field-input textarea:focus {
+    border-color: var(--color-primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+}
+
+.msf-field-input textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Navigation Buttons */
+.msf-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--color-border-light);
+}
+
+.msf-btn-prev {
+    padding: 12px 24px;
+}
+
+.msf-btn-next,
+.msf-btn-submit {
+    padding: 12px 32px;
+    margin-left: auto;
+}
+
+/* Error Messages */
+.msf-error {
+    font-size: var(--font-size-sm);
+    color: var(--color-error);
+    margin-top: var(--spacing-md);
+    min-height: 20px;
+}
+
+/* Success Panel */
+.msf-success-content {
+    text-align: center;
+    padding: var(--spacing-2xl) 0;
+}
+
+.msf-success-icon {
+    margin-bottom: var(--spacing-xl);
+}
+
+.msf-success-content h3 {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-md);
+}
+
+.msf-success-content p {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto var(--spacing-md);
+}
+
+.msf-success-sub {
+    font-size: var(--font-size-sm) !important;
+    color: var(--color-text-tertiary) !important;
+}
+
+.msf-success-sub a {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .msf-wrapper {
+        padding: var(--spacing-lg);
+    }
+
+    .msf-cards {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .msf-contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .msf-step-dot small {
+        display: none;
+    }
+
+    .msf-step-dot span {
+        width: 28px;
+        height: 28px;
+        font-size: var(--font-size-xs);
+    }
+}
+
 /* --- Honeypot (anti-spam, hidden from users) --- */
 .form-hp {
     position: absolute;

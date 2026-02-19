@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initCalculator();
     initBorrowingCalc();
+    initMultiStepForm();
     initContactForm();
     initCounterAnimation();
     initCookieConsent();
@@ -472,6 +473,376 @@ function initBorrowingCalc() {
 
     // Initial calculation
     calculateBorrowing();
+}
+
+/* --- Multi-Step Enquiry Form --- */
+function initMultiStepForm() {
+    const form = document.getElementById('multiStepForm');
+    if (!form) return;
+
+    let currentStep = 1;
+    const totalSteps = 5;
+    const formData = {};
+
+    const panels = form.querySelectorAll('.msf-panel[data-panel]');
+    const dots = document.querySelectorAll('.msf-step-dot');
+    const progressBar = document.getElementById('msfProgressBar');
+    const prevBtn = document.getElementById('msfPrev');
+    const nextBtn = document.getElementById('msfNext');
+    const submitBtn = document.getElementById('msfSubmit');
+    const navBar = document.getElementById('msfNav');
+
+    // Step 2 dynamic options config
+    const step2Config = {
+        'Home Loan': {
+            subtitle: 'What type of home loan are you looking for?',
+            options: ['First Home Buyer', 'Next Home / Upgrade', 'Investment Property', 'Construction Loan']
+        },
+        'Refinancing': {
+            subtitle: 'What\'s the main reason for refinancing?',
+            options: ['Better Interest Rate', 'Access Equity', 'Consolidate Debts', 'Switch Lender']
+        },
+        'Car Loan': {
+            subtitle: 'Tell us about the vehicle.',
+            options: ['New Car', 'Used Car', 'Personal Use', 'Business Use']
+        },
+        'Asset Finance': {
+            subtitle: 'What type of asset are you financing?',
+            options: ['Equipment', 'Machinery', 'Technology / IT', 'Other Business Asset']
+        },
+        'Commercial Finance': {
+            subtitle: 'What type of commercial finance do you need?',
+            options: ['Commercial Property', 'Working Capital', 'Business Equipment', 'Development Finance']
+        },
+        'Personal Loan': {
+            subtitle: 'What is the loan for?',
+            options: ['Debt Consolidation', 'Home Renovation', 'Holiday / Travel', 'Other Purpose']
+        },
+        'SMSF Loan': {
+            subtitle: 'What type of SMSF property?',
+            options: ['Residential Property', 'Commercial Property']
+        }
+    };
+
+    // --- Init button group click handlers ---
+    document.querySelectorAll('.msf-btn-group').forEach(group => {
+        group.querySelectorAll('.msf-option-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                group.querySelectorAll('.msf-option-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+            });
+        });
+    });
+
+    // --- Navigation ---
+    function goToStep(step) {
+        // Hide all panels
+        panels.forEach(p => {
+            p.classList.remove('active');
+            p.style.display = 'none';
+        });
+
+        // Show target panel
+        const target = form.querySelector(`.msf-panel[data-panel="${step}"]`);
+        if (target) {
+            target.style.display = '';
+            // Force reflow for animation
+            void target.offsetWidth;
+            target.classList.add('active');
+        }
+
+        // Update dots
+        dots.forEach(dot => {
+            const dotStep = parseInt(dot.dataset.step);
+            dot.classList.remove('active', 'completed');
+            if (dotStep === step) dot.classList.add('active');
+            if (dotStep < step) dot.classList.add('completed');
+        });
+
+        // Update progress bar
+        const progress = (step / totalSteps) * 100;
+        progressBar.style.setProperty('--progress', progress + '%');
+
+        // Update button visibility
+        prevBtn.style.display = step > 1 ? '' : 'none';
+        nextBtn.style.display = step < totalSteps ? '' : 'none';
+        submitBtn.style.display = step === totalSteps ? '' : 'none';
+
+        currentStep = step;
+    }
+
+    // --- Populate Step 2 based on loan type ---
+    function populateStep2(loanType) {
+        const config = step2Config[loanType];
+        if (!config) return;
+
+        const container = document.getElementById('step2Options');
+        const subtitle = document.getElementById('step2Subtitle');
+        subtitle.textContent = config.subtitle;
+
+        container.innerHTML = config.options.map(opt => `
+            <label class="msf-option-select">
+                <input type="radio" name="msf_loanDetail" value="${opt}">
+                <span class="msf-option-label">${opt}</span>
+            </label>
+        `).join('');
+    }
+
+    // --- Validation per step ---
+    function validateStep(step) {
+        const errorEl = document.getElementById(`msfError${step}`);
+        if (errorEl) errorEl.textContent = '';
+
+        switch (step) {
+            case 1: {
+                const selected = form.querySelector('input[name="msf_loanType"]:checked');
+                if (!selected) {
+                    errorEl.textContent = 'Please select a loan type.';
+                    return false;
+                }
+                formData.loanType = selected.value;
+                populateStep2(selected.value);
+                return true;
+            }
+            case 2: {
+                const selected = form.querySelector('input[name="msf_loanDetail"]:checked');
+                if (!selected) {
+                    errorEl.textContent = 'Please select an option.';
+                    return false;
+                }
+                formData.loanDetail = selected.value;
+                return true;
+            }
+            case 3: {
+                const emp = getSelectedBtn('msfEmployment');
+                const amount = getSelectedBtn('msfLoanAmount');
+                const deposit = getSelectedBtn('msfDeposit');
+                if (!emp) {
+                    errorEl.textContent = 'Please select your employment status.';
+                    return false;
+                }
+                if (!amount) {
+                    errorEl.textContent = 'Please select your loan amount range.';
+                    return false;
+                }
+                if (!deposit) {
+                    errorEl.textContent = 'Please select your deposit situation.';
+                    return false;
+                }
+                formData.employment = emp;
+                formData.loanAmountRange = amount;
+                formData.deposit = deposit;
+                return true;
+            }
+            case 4: {
+                const timeline = getSelectedBtn('msfTimeline');
+                const found = getSelectedBtn('msfFound');
+                const preApproval = getSelectedBtn('msfPreApproval');
+                if (!timeline) {
+                    errorEl.textContent = 'Please select your timeline.';
+                    return false;
+                }
+                formData.timeline = timeline;
+                formData.propertyFound = found || 'Not specified';
+                formData.preApproval = preApproval || 'Not specified';
+                return true;
+            }
+            case 5: {
+                const firstName = sanitizeInput(document.getElementById('msfFirstName').value);
+                const lastName = sanitizeInput(document.getElementById('msfLastName').value);
+                const email = sanitizeInput(document.getElementById('msfEmail').value);
+                const phone = sanitizeInput(document.getElementById('msfPhone').value);
+                const consent = document.getElementById('msfConsent').checked;
+
+                if (!firstName || !lastName) {
+                    errorEl.textContent = 'Please enter your full name.';
+                    return false;
+                }
+                if (!isValidEmail(email)) {
+                    errorEl.textContent = 'Please enter a valid email address.';
+                    return false;
+                }
+                if (!isValidAusPhone(phone)) {
+                    errorEl.textContent = 'Please enter a valid Australian phone number.';
+                    return false;
+                }
+                if (!consent) {
+                    errorEl.textContent = 'Please agree to the Privacy Policy.';
+                    return false;
+                }
+
+                formData.firstName = firstName;
+                formData.lastName = lastName;
+                formData.email = email;
+                formData.phone = phone;
+                formData.contactMethod = getSelectedBtn('msfContactMethod') || 'Not specified';
+                formData.bestTime = getSelectedBtn('msfBestTime') || 'Not specified';
+                formData.notes = sanitizeInput(document.getElementById('msfNotes').value);
+                formData.privacyConsent = true;
+                return true;
+            }
+        }
+        return true;
+    }
+
+    function getSelectedBtn(groupId) {
+        const group = document.getElementById(groupId);
+        if (!group) return null;
+        const selected = group.querySelector('.msf-option-btn.selected');
+        return selected ? selected.dataset.value : null;
+    }
+
+    // --- Lead Scoring ---
+    function calculateLeadScore() {
+        let score = 0;
+
+        // Timeline urgency
+        if (formData.timeline === 'ASAP') score += 30;
+        else if (formData.timeline === '1-3 months') score += 20;
+        else if (formData.timeline === '3-6 months') score += 10;
+        else score += 5;
+
+        // Has property/asset
+        if (formData.propertyFound === 'Yes') score += 15;
+        else if (formData.propertyFound === 'Still looking') score += 8;
+
+        // Pre-approval status
+        if (formData.preApproval === 'Yes') score += 10;
+        else if (formData.preApproval === 'Expired') score += 5;
+
+        // Loan amount (higher = higher value lead)
+        if (formData.loanAmountRange === 'Over $1M') score += 20;
+        else if (formData.loanAmountRange === '$500K - $1M') score += 15;
+        else if (formData.loanAmountRange === '$250K - $500K') score += 10;
+        else score += 5;
+
+        // Deposit strength
+        if (formData.deposit === 'Over 20%') score += 15;
+        else if (formData.deposit === '10% - 20%') score += 10;
+        else if (formData.deposit === 'Under 10%') score += 5;
+
+        return Math.min(score, 100);
+    }
+
+    function getLeadPriority(score) {
+        if (score >= 60) return 'hot';
+        if (score >= 35) return 'warm';
+        return 'cold';
+    }
+
+    // --- Event Listeners ---
+    nextBtn.addEventListener('click', () => {
+        if (validateStep(currentStep)) {
+            goToStep(currentStep + 1);
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentStep > 1) {
+            goToStep(currentStep - 1);
+        }
+    });
+
+    // --- Form Submit ---
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!validateStep(5)) return;
+
+        // Honeypot check
+        const hp = document.getElementById('msfHoneypot');
+        if (hp && hp.value.length > 0) {
+            showSuccess();
+            return;
+        }
+
+        // Rate limiting
+        if (!RateLimiter.isAllowed('multiStepForm')) {
+            const wait = RateLimiter.getWaitTime('multiStepForm');
+            const errorEl = document.getElementById('msfError5');
+            errorEl.textContent = `Too many submissions. Please wait ${Math.ceil(wait / 60)} minute(s).`;
+            return;
+        }
+
+        // Show loading
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline-flex';
+        submitBtn.disabled = true;
+
+        // Lead scoring
+        const leadScore = calculateLeadScore();
+        const leadPriority = getLeadPriority(leadScore);
+
+        const submission = {
+            ...formData,
+            leadScore: leadScore,
+            leadPriority: leadPriority,
+            submittedAt: new Date().toISOString(),
+            source: 'website-guided-form',
+            status: 'new'
+        };
+
+        try {
+            if (window.firebaseDB) {
+                const { collection, addDoc } = await import('https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js');
+                await addDoc(collection(window.firebaseDB, 'enquiries'), submission);
+            } else {
+                const projectId = 'sandeepweb-21c9f';
+                const fields = {};
+                Object.entries(submission).forEach(([key, val]) => {
+                    if (typeof val === 'number') {
+                        fields[key] = { integerValue: val };
+                    } else if (typeof val === 'boolean') {
+                        fields[key] = { booleanValue: val };
+                    } else {
+                        fields[key] = { stringValue: String(val) };
+                    }
+                });
+
+                const response = await fetch(
+                    `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/enquiries`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ fields })
+                    }
+                );
+                if (!response.ok) throw new Error('Failed to submit');
+            }
+
+            showSuccess();
+        } catch (error) {
+            console.error('Form submission error:', error);
+            const errorEl = document.getElementById('msfError5');
+            errorEl.textContent = 'Something went wrong. Please call us at 0410 867 001.';
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
+            submitBtn.disabled = false;
+        }
+    });
+
+    function showSuccess() {
+        panels.forEach(p => {
+            p.classList.remove('active');
+            p.style.display = 'none';
+        });
+        const successPanel = form.querySelector('.msf-panel[data-panel="success"]');
+        successPanel.style.display = '';
+        successPanel.classList.add('active');
+        navBar.style.display = 'none';
+
+        // All dots completed
+        dots.forEach(dot => {
+            dot.classList.remove('active');
+            dot.classList.add('completed');
+        });
+        progressBar.style.setProperty('--progress', '100%');
+    }
+
+    // Initialize
+    goToStep(1);
 }
 
 /* --- Contact Form with Firebase + Security --- */

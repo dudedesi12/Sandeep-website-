@@ -669,6 +669,278 @@
         </div>
     </section>
 
+    <!-- Multi-Step Enquiry Form -->
+    <section class="enquiry" id="enquiry">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Get Started</span>
+                <h2 class="section-title">Tell us what<br>you need.</h2>
+                <p class="section-subtitle">Complete this quick guided form and we'll match you with the right finance solution. Takes under 2 minutes.</p>
+            </div>
+
+            <div class="msf-wrapper animate-on-scroll">
+                <!-- Progress Bar -->
+                <div class="msf-progress">
+                    <div class="msf-progress-bar" id="msfProgressBar"></div>
+                    <div class="msf-steps-indicator">
+                        <div class="msf-step-dot active" data-step="1"><span>1</span><small>Loan Type</small></div>
+                        <div class="msf-step-dot" data-step="2"><span>2</span><small>Details</small></div>
+                        <div class="msf-step-dot" data-step="3"><span>3</span><small>Finances</small></div>
+                        <div class="msf-step-dot" data-step="4"><span>4</span><small>Timeline</small></div>
+                        <div class="msf-step-dot" data-step="5"><span>5</span><small>Contact</small></div>
+                    </div>
+                </div>
+
+                <form id="multiStepForm" novalidate>
+                    <!-- Honeypot -->
+                    <div class="form-hp" aria-hidden="true" tabindex="-1">
+                        <input type="text" name="company" id="msfHoneypot" autocomplete="off" tabindex="-1">
+                    </div>
+
+                    <!-- STEP 1: Loan Type -->
+                    <div class="msf-panel active" data-panel="1">
+                        <h3 class="msf-panel-title">What are you looking for?</h3>
+                        <p class="msf-panel-sub">Select the type of finance you need.</p>
+                        <div class="msf-cards" id="loanTypeCards">
+                            <label class="msf-card">
+                                <input type="radio" name="msf_loanType" value="Home Loan" required>
+                                <div class="msf-card-inner">
+                                    <div class="msf-card-icon" style="--icon-bg:#E8F5E9;--icon-color:#2E7D32;">
+                                        <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M16 3L3 13v14a2 2 0 002 2h8v-8h6v8h8a2 2 0 002-2V13L16 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    </div>
+                                    <span class="msf-card-label">Home Loan</span>
+                                </div>
+                            </label>
+                            <label class="msf-card">
+                                <input type="radio" name="msf_loanType" value="Refinancing">
+                                <div class="msf-card-inner">
+                                    <div class="msf-card-icon" style="--icon-bg:#E8F5E9;--icon-color:#2E7D32;">
+                                        <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M4 16v8a2 2 0 002 2h20a2 2 0 002-2v-8M8 12l8-8 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <span class="msf-card-label">Refinancing</span>
+                                </div>
+                            </label>
+                            <label class="msf-card">
+                                <input type="radio" name="msf_loanType" value="Car Loan">
+                                <div class="msf-card-inner">
+                                    <div class="msf-card-icon" style="--icon-bg:#E3F2FD;--icon-color:#1565C0;">
+                                        <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M7 18l2-6.5a2 2 0 011.9-1.5h10.2a2 2 0 011.9 1.5L25 18M7 18h18M7 18v6h3v-2h12v2h3v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.5" fill="currentColor"/><circle cx="22" cy="21" r="1.5" fill="currentColor"/></svg>
+                                    </div>
+                                    <span class="msf-card-label">Car Loan</span>
+                                </div>
+                            </label>
+                            <label class="msf-card">
+                                <input type="radio" name="msf_loanType" value="Asset Finance">
+                                <div class="msf-card-inner">
+                                    <div class="msf-card-icon" style="--icon-bg:#FFF3E0;--icon-color:#E65100;">
+                                        <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 14h24M10 20h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <span class="msf-card-label">Asset Finance</span>
+                                </div>
+                            </label>
+                            <label class="msf-card">
+                                <input type="radio" name="msf_loanType" value="Commercial Finance">
+                                <div class="msf-card-inner">
+                                    <div class="msf-card-icon" style="--icon-bg:#F3E5F5;--icon-color:#7B1FA2;">
+                                        <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M4 28h24M8 28V8l8-4 8 4v20M14 12h4M14 16h4M14 20h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    </div>
+                                    <span class="msf-card-label">Commercial</span>
+                                </div>
+                            </label>
+                            <label class="msf-card">
+                                <input type="radio" name="msf_loanType" value="Personal Loan">
+                                <div class="msf-card-inner">
+                                    <div class="msf-card-icon" style="--icon-bg:#E0F7FA;--icon-color:#00838F;">
+                                        <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="5" stroke="currentColor" stroke-width="2"/><path d="M6 28c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <span class="msf-card-label">Personal Loan</span>
+                                </div>
+                            </label>
+                            <label class="msf-card">
+                                <input type="radio" name="msf_loanType" value="SMSF Loan">
+                                <div class="msf-card-inner">
+                                    <div class="msf-card-icon" style="--icon-bg:#FCE4EC;--icon-color:#C62828;">
+                                        <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M16 4l-2 6H8l5 4-2 6 5-4 5 4-2-6 5-4h-6L16 4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 24h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <span class="msf-card-label">SMSF Loan</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="msf-error" id="msfError1"></div>
+                    </div>
+
+                    <!-- STEP 2: Loan Details (dynamic) -->
+                    <div class="msf-panel" data-panel="2">
+                        <h3 class="msf-panel-title">Tell us a bit more</h3>
+                        <p class="msf-panel-sub" id="step2Subtitle">Select what best describes your situation.</p>
+                        <div class="msf-options" id="step2Options">
+                            <!-- Dynamically populated based on Step 1 selection -->
+                        </div>
+                        <div class="msf-error" id="msfError2"></div>
+                    </div>
+
+                    <!-- STEP 3: Financial Situation -->
+                    <div class="msf-panel" data-panel="3">
+                        <h3 class="msf-panel-title">Your financial situation</h3>
+                        <p class="msf-panel-sub">This helps us estimate what you may qualify for.</p>
+                        <div class="msf-form-grid">
+                            <div class="msf-field">
+                                <label>Employment Status</label>
+                                <div class="msf-btn-group" id="msfEmployment">
+                                    <button type="button" class="msf-option-btn" data-value="PAYG Full-Time">PAYG Full-Time</button>
+                                    <button type="button" class="msf-option-btn" data-value="PAYG Part-Time">PAYG Part-Time</button>
+                                    <button type="button" class="msf-option-btn" data-value="Self-Employed">Self-Employed</button>
+                                    <button type="button" class="msf-option-btn" data-value="Casual/Contract">Casual/Contract</button>
+                                </div>
+                            </div>
+                            <div class="msf-field">
+                                <label>Approximate Loan Amount Needed</label>
+                                <div class="msf-btn-group" id="msfLoanAmount">
+                                    <button type="button" class="msf-option-btn" data-value="Under $250K">Under $250K</button>
+                                    <button type="button" class="msf-option-btn" data-value="$250K - $500K">$250K - $500K</button>
+                                    <button type="button" class="msf-option-btn" data-value="$500K - $1M">$500K - $1M</button>
+                                    <button type="button" class="msf-option-btn" data-value="Over $1M">Over $1M</button>
+                                </div>
+                            </div>
+                            <div class="msf-field">
+                                <label>Do you have a deposit or equity?</label>
+                                <div class="msf-btn-group" id="msfDeposit">
+                                    <button type="button" class="msf-option-btn" data-value="No deposit yet">No deposit yet</button>
+                                    <button type="button" class="msf-option-btn" data-value="Under 10%">Under 10%</button>
+                                    <button type="button" class="msf-option-btn" data-value="10% - 20%">10% - 20%</button>
+                                    <button type="button" class="msf-option-btn" data-value="Over 20%">Over 20%</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="msf-error" id="msfError3"></div>
+                    </div>
+
+                    <!-- STEP 4: Timeline & Readiness -->
+                    <div class="msf-panel" data-panel="4">
+                        <h3 class="msf-panel-title">Your timeline</h3>
+                        <p class="msf-panel-sub">How soon are you looking to move forward?</p>
+                        <div class="msf-form-grid">
+                            <div class="msf-field">
+                                <label>When do you need this?</label>
+                                <div class="msf-btn-group" id="msfTimeline">
+                                    <button type="button" class="msf-option-btn" data-value="ASAP">ASAP</button>
+                                    <button type="button" class="msf-option-btn" data-value="1-3 months">1-3 months</button>
+                                    <button type="button" class="msf-option-btn" data-value="3-6 months">3-6 months</button>
+                                    <button type="button" class="msf-option-btn" data-value="Just exploring">Just exploring</button>
+                                </div>
+                            </div>
+                            <div class="msf-field">
+                                <label>Have you found a property or asset?</label>
+                                <div class="msf-btn-group" id="msfFound">
+                                    <button type="button" class="msf-option-btn" data-value="Yes">Yes</button>
+                                    <button type="button" class="msf-option-btn" data-value="Still looking">Still looking</button>
+                                    <button type="button" class="msf-option-btn" data-value="No">No / Not applicable</button>
+                                </div>
+                            </div>
+                            <div class="msf-field">
+                                <label>Do you have pre-approval?</label>
+                                <div class="msf-btn-group" id="msfPreApproval">
+                                    <button type="button" class="msf-option-btn" data-value="Yes">Yes</button>
+                                    <button type="button" class="msf-option-btn" data-value="No">No</button>
+                                    <button type="button" class="msf-option-btn" data-value="Expired">Expired</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="msf-error" id="msfError4"></div>
+                    </div>
+
+                    <!-- STEP 5: Contact Details -->
+                    <div class="msf-panel" data-panel="5">
+                        <h3 class="msf-panel-title">Almost done! Your details</h3>
+                        <p class="msf-panel-sub">We'll use these to get back to you with a tailored recommendation.</p>
+                        <div class="msf-form-grid msf-contact-grid">
+                            <div class="msf-field-input">
+                                <label for="msfFirstName">First Name *</label>
+                                <input type="text" id="msfFirstName" name="msf_firstName" required placeholder="John">
+                            </div>
+                            <div class="msf-field-input">
+                                <label for="msfLastName">Last Name *</label>
+                                <input type="text" id="msfLastName" name="msf_lastName" required placeholder="Smith">
+                            </div>
+                            <div class="msf-field-input">
+                                <label for="msfEmail">Email *</label>
+                                <input type="email" id="msfEmail" name="msf_email" required placeholder="john@example.com">
+                            </div>
+                            <div class="msf-field-input">
+                                <label for="msfPhone">Phone *</label>
+                                <input type="tel" id="msfPhone" name="msf_phone" required placeholder="04XX XXX XXX">
+                            </div>
+                            <div class="msf-field">
+                                <label>Preferred Contact Method</label>
+                                <div class="msf-btn-group" id="msfContactMethod">
+                                    <button type="button" class="msf-option-btn" data-value="Call">Call</button>
+                                    <button type="button" class="msf-option-btn" data-value="SMS">SMS</button>
+                                    <button type="button" class="msf-option-btn" data-value="Email">Email</button>
+                                    <button type="button" class="msf-option-btn" data-value="WhatsApp">WhatsApp</button>
+                                </div>
+                            </div>
+                            <div class="msf-field">
+                                <label>Best Time to Reach You</label>
+                                <div class="msf-btn-group" id="msfBestTime">
+                                    <button type="button" class="msf-option-btn" data-value="Morning">Morning</button>
+                                    <button type="button" class="msf-option-btn" data-value="Afternoon">Afternoon</button>
+                                    <button type="button" class="msf-option-btn" data-value="Evening">Evening</button>
+                                    <button type="button" class="msf-option-btn" data-value="Anytime">Anytime</button>
+                                </div>
+                            </div>
+                            <div class="msf-field-input msf-full-width">
+                                <label for="msfNotes">Anything else? (optional)</label>
+                                <textarea id="msfNotes" name="msf_notes" rows="3" placeholder="Any additional details that might help us..."></textarea>
+                            </div>
+                            <div class="msf-field-input msf-full-width">
+                                <label class="consent-label">
+                                    <input type="checkbox" id="msfConsent" name="msf_consent" required>
+                                    <span class="consent-checkmark"></span>
+                                    <span class="consent-text">I agree to the <a href="privacy.html" target="_blank">Privacy Policy</a> and consent to LoanMate Finance collecting and handling my personal information.</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="msf-error" id="msfError5"></div>
+                    </div>
+
+                    <!-- Success Panel -->
+                    <div class="msf-panel msf-success-panel" data-panel="success" style="display:none;">
+                        <div class="msf-success-content">
+                            <div class="msf-success-icon">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                                    <circle cx="32" cy="32" r="30" stroke="#22C55E" stroke-width="3"/>
+                                    <path d="M20 32l8 8 16-16" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3>Thank you!</h3>
+                            <p>Your enquiry has been submitted successfully. We'll review your details and get back to you within <strong>24 hours</strong>.</p>
+                            <p class="msf-success-sub">In the meantime, feel free to call us at <a href="tel:0410867001">0410 867 001</a> if you'd like to chat sooner.</p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="msf-nav" id="msfNav">
+                        <button type="button" class="btn btn-secondary msf-btn-prev" id="msfPrev" style="display:none;">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            Back
+                        </button>
+                        <button type="button" class="btn btn-primary msf-btn-next" id="msfNext">
+                            Next
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <button type="submit" class="btn btn-primary msf-btn-submit" id="msfSubmit" style="display:none;">
+                            <span class="btn-text">Submit Enquiry</span>
+                            <span class="btn-loading" style="display:none;">
+                                <svg class="spinner" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="50" stroke-dashoffset="25"/></svg>
+                                Submitting...
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
